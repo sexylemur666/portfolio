@@ -171,7 +171,7 @@ img.icon {
         transform: translate(-50%, -50%);
     }
 
-    .tags {
+    .project-item .tags {
         font-weight: 600;
     }
     
@@ -451,6 +451,7 @@ img.icon {
 .project-page .tags {
     padding-top: .5rem;
     font-size: 0.85rem;
+    font-weight: normal;
     line-height: 1rem;
     max-width: 80%;
 }
