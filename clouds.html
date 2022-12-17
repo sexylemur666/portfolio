@@ -104,26 +104,43 @@
   
             <a class="mono-link" href="#tileable"><h3 id="tileable">Making it Tileable</h3></a>
             <p>
-                One final pitfall of our previous scheme is that textures created that way are not tileable: visible seams occur when we place two copies of a
+                One last pitfall of our previous scheme is that textures created that way are not tileable: visible seams occur when we place two copies of a
                 texture next to each other. Luckily, there's a simple trick to fix that: wrap the grid points around the unit cube. This makes
                 the grid points periodic and thus makes the noise texture tileable as well.
             </p>
     
             
             <a class="mono-link" href="#lighting"><h2 id="lighting">II. Lighting</h2></a>
-            There are three key ingredients when it comes to realistic lighting for the clouds:
+            <p>There are three key ingredients when it comes to realistic lighting for the clouds.</p>
             <ul>
                 <li>Beer's Law (exponential decay of light)</li>
                 <li>Anistropic scattering (silver lining)</li>
                 <li>Dark edges on clouds</li>
             </ul>
-            Still under construction 'cuz Lemur just finished this project two days ago. Sorry about that! 😢
+            <p>Let's walk through them now.</p>
             <a class="mono-link" href="#beers-law"><h3 id="beers-law">Beer's Law</h3></a>
+            <p>
+                Beer's Law models the exponential decay of light energy as it propagates in an attenuating medium, like clouds. 
+                In a uniform medium, the energy of light attenutaes in a simple exponential function of the distance travelled.
+            </p>
+            <img src="./assets/img/clouds/eq/eq_beer.svg" class="eq-block">
+            <p>
+                For light travelling through a heterogeneous medium, we can modify the equation above slightly to acount for the varying density.
+            </p>
+            <img src="./assets/img/clouds/eq/eq_beer_hetero.svg" class="eq-block" style="height: 2.2rem">
+            We can see this type of attenuation at multiple spots in the volume rendering equation.
+            <img src="./assets/img/clouds/eq/eq_volume.svg" class="eq-block" style="height: 5.1rem">
+            <img src="./assets/img/clouds/volume.jpeg" alt="Diagram showing different terms in the volume rendering equation.">
+
+
             <a class="mono-link" href="#anistropic-scattering"><h3 id="anistropic-scattering">Anistropic Scattering</h3></a>
+            Still under construction ('cuz Lemur just finished this project two days ago. Sorry about that! 😢)
+
             <a class="mono-link" href="#dark-edges"><h3 id="dark-edges">Dark Edges</h3></a>
+            Still under construction ('cuz Lemur just finished this project two days ago. Sorry about that! 😢)
             
             <a class="mono-link" href="#sky"><h2 id="sky">III. Sky</h2></a>
-            Still under construction 'cuz Lemur just finished this project two days ago. Sorry about that! 😢
+            Still under construction ('cuz Lemur just finished this project two days ago. Sorry about that! 😢)
         </div>
     </main>
 
