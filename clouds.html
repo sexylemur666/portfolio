@@ -59,9 +59,9 @@
               </p>
 
             <p>
-                I ❤️ clouds. That's why I built a real-time volumetric clouds renderer with my CS1230 teammates, based on 
+                I ❤️ clouds. That's why I built a real-time volumetric clouds renderer with my <a href="https://cs1230.graphics/">CS1230</a> teammates, based on 
                 <a href="http://killzone.dl.playstation.net/killzone/horizonzerodawn/presentations/Siggraph15_Schneider_Real-Time_Volumetric_Cloudscapes_of_Horizon_Zero_Dawn.pdf">
-                this</a> presentation at SIGGRAPH 2015 from the development team of Horizon Zero Dawn. The renderer we developed with OpenGL and C++ supports intricate cloud <a href="#shape">shapes 
+                this</a> talk at SIGGRAPH 2015 from the development team of <em>Horizon Zero Dawn</em>. The renderer we developed with OpenGL and C++ supports intricate cloud <a href="#shape">shapes 
                 generation</a>, realistic <a href="#lighting"> lighting effects</a>, and a physically-based <a href="#sky">sky</a> that varies throughout the day.
             </p>
         
@@ -115,7 +115,7 @@
             <ul>
                 <li><a href="#beers-law">Beer's Law</a> or the exponential decay of light</li>
                 <li><a href="#anistropic-scattering">Anistropic scattering</a> responsible for the iconic silver lining effect</li>
-                <li><a href="#dark-edges">Dark edges</a> on clouds that give them a sugar-powder-like look</li>
+                <li><a href="#dark-edges">Dark edges</a> on clouds that give them a powdered-sugar-like look</li>
             </ul>
             <p>Let's walk through them now.</p>
             <a class="mono-link" href="#beers-law"><h3 id="beers-law">Beer's Law</h3></a>
@@ -140,8 +140,8 @@
                 The obvious headache now is the in-scattering term C. (We can ignore emssion since clouds don't shine themselves.) Evaulating it
                 precisely involves taking an integral of all in-scattered light over all possible direction - but each beam of in-scattered light obeys
                 the exact same formula we are trying to solve! Instead of fighting this recursive nightmare, we make the assumption that
-                most of the in-scattered energy comes from the primary scattering path: Sun → volume → sample point. This simplifies the term 
-                to just one integral
+                most of the in-scattered energy comes from the primary scattering path: Sun → volume → sample point. This simplifies the in-scattering 
+                down to just one integral
             </p>
             <img src="./assets/img/clouds/eq/eq_inscatter.svg" class="eq-block" style="height: 2rem">
             <p>This is now much more computationally tractable and it gives us a base lighting model to build upon.</p>
@@ -151,8 +151,8 @@
             <a class="mono-link" href="#anistropic-scattering"><h3 id="anistropic-scattering">Anistropic Scattering</h3></a>
             <p>
                 Anistropic scattering sounds like a scary term. But it really just means that light prefers to scatter in some direction 
-                rather than others. In clouds, light tends to move forward instead of backward. This is what gives clouds the stunning silver 
-                lining look when the Sun shines right through them into our eyes.
+                rather than others. In clouds, light tends to scatter forward instead of backward. This is what gives clouds the silver 
+                lining look when the Sun shines right through them.
             </p>
             <p>
                 Following the SIGGRAPH talk, we use the Henyey-Greenstein phase function, 
@@ -164,16 +164,28 @@
             <p>Notice how much brighter the cloud has become near the sun. We get our silver lining!</p>
 
             <a class="mono-link" href="#dark-edges"><h3 id="dark-edges">Dark Edges</h3></a>
-            <p>
+            <p style="margin-bottom: 0;">
                 There's still one ingredient missing for our full-blown cloud lighting - the dark edges of the clouds when we look away 
-                from the Sun.
+                from the Sun. In the talk, this effect was referred to as the "powdered sugar look" because there seems to be a similar effect 
+                in piles of powdered sugar.
             </p>
-<p>
-                <em>Still under construction ('cuz Lemur just finished this project two days ago. Sorry about that! 😢)</em>
+            <div class="row">
+                <div class="col-6"><img src="./assets/img/clouds/powder-clouds.png"></div>
+                <div class="col-6"><img src="./assets/img/clouds/powder-sugar.png"></div>
+            </div>
+            <p>
+                The reason we do not get this effect automatically is due to our crude, one-bounce scattering approximation. In reality, 
+                the chance of in-scattering is much more significant when we go deep into a cloud, since scatterd light is more likely 
+                to escape closer to the cloud surface. To approximate this effect, we can multiply each light energy sample by a correction 
+                term that grows with depth from the cloud surface.
+            </p>
+            <img src="./assets/img/clouds/eq/eq_powder.svg" class="eq-block" style="height: 3rem">
 
+<p>
+    <em>More coming soon... (Lemur just finished this project two days ago. Sorry about that! 😢)</em>
 </p>                
             <a class="mono-link" href="#sky"><h2 id="sky">III. Sky</h2></a>
-            <em>Still under construction ('cuz Lemur just finished this project two days ago. Sorry about that! 😢)</em>
+            <em>More coming soon... (Lemur just finished this project two days ago. Sorry about that! 😢)</em>
         </div>
     </main>
 
