@@ -303,6 +303,7 @@ img.icon {
     cursor: pointer;
     transition: transform 0.3s ease-out,
                 filter 0.3s ease-out;
+    border-radius: var(--br-lg);
 }
 
 .project-item:hover img,
