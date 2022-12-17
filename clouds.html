@@ -61,7 +61,7 @@
             <p>
                 I ❤️ clouds. That's why I built a real-time volumetric clouds renderer with my CS1230 teammates, based on 
                 <a href="http://killzone.dl.playstation.net/killzone/horizonzerodawn/presentations/Siggraph15_Schneider_Real-Time_Volumetric_Cloudscapes_of_Horizon_Zero_Dawn.pdf">
-                this</a> presentation at SIGGRAPH 2015. The renderer we developed with OpenGL and C++ supports intricate cloud <a href="#shape">shapes 
+                this</a> presentation at SIGGRAPH 2015 from the development team of Horizon Zero Dawn. The renderer we developed with OpenGL and C++ supports intricate cloud <a href="#shape">shapes 
                 generation</a>, realistic <a href="#lighting"> lighting effects</a>, and a physically-based <a href="#sky">sky</a> that varies throughout the day.
             </p>
         
@@ -80,12 +80,12 @@
                 The first optimization we make of the above process is to take stratified samples of feature points in regular grid cells (let's call them
                 grid points) instead of uniformly in space. 
                 This reduces the quadratic number of candidate neighbors dramatically to 27 (constant!) in 3D since we can easily find the cell
-                any point belongs. Here is an illustration for the 2D case as they're easier to draw.
+                any point belongs. Here is an illustration for the 2D case as it is slightly easier to draw.
             </p>
             <img src="./assets/img/clouds/stratified.jpg" class="mix-multiply"></img>
             <p>
-                For even greater efficiency, we send all the grid points to a compute shader, which calculates a 
-                3D noise map with hundreds of GPU cores. Long live parallelism!
+                For even greater efficiency, we also send all the grid points to a compute shader, which calculates a 
+                3D noise map with hundreds of GPU cores in parallel. Long live parallelism!
             </p>
             <a class="mono-link" href="#fractal-noise"><h3 id="fractal-noise">Fractal Noise</h3></a>
             <p>
@@ -144,7 +144,7 @@
                 to just one integral
             </p>
             <img src="./assets/img/clouds/eq/eq_inscatter.svg" class="eq-block" style="height: 2rem">
-            <p>This is now much more computationally tractable and it still gives us some resonable results.</p>
+            <p>This is now much more computationally tractable and it gives us a base lighting model to build upon.</p>
 
             <em>Still under construction ('cuz Lemur just finished this project two days ago. Sorry about that! 😢)</em>
 
@@ -163,6 +163,8 @@
             <em>Still under construction ('cuz Lemur just finished this project two days ago. Sorry about that! 😢)</em>
 
             <a class="mono-link" href="#dark-edges"><h3 id="dark-edges">Dark Edges</h3></a>
+            There's still one thing missing for our final clouds lighting. The dark edges of the clouds when one looks away 
+            from the Sun. The developer
             <em>Still under construction ('cuz Lemur just finished this project two days ago. Sorry about that! 😢)</em>
             
             <a class="mono-link" href="#sky"><h2 id="sky">III. Sky</h2></a>
