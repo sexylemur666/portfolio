@@ -69,13 +69,13 @@
             <a class="mono-link" href="#shape"><h2 id="shape">I. Shape</h2></a>
             <p><a href="https://en.wikipedia.org/wiki/Worley_noise">Worley noise</a> is a type of cellular noise where the value of each point 
                 in space is determined by its distance to the closest neighbor in a set of random feature points. It is great for 
-                modeling the density of clouds because when inverted, it tends to produce those nice bobbly patterns that resemble clouds.
+                modeling the density of clouds because when inverted (hover or tap on the image below to see it yourself), it tends to produce those nice bobbly patterns that resemble clouds.
             </p>
             <div class="img-hover-pair">
                 <img src="./assets/img/clouds/worley.png"></img>
                 <img src="./assets/img/clouds/worley_inverted.png"></img>
             </div>
-            <a class="mono-link" href="#optimizations"><h3 id="optimizations">Optimization</h3></a>
+            <a class="mono-link" href="#creating-worley-fast"><h3 id="creating-worley-fast">Spawning Worley Noise, Fast</h3></a>
             <p>
                 The first optimization we make of the above process is to take stratified samples of feature points in regular grid cells (let's call them
                 grid points) instead of uniformly in space. 
@@ -84,7 +84,7 @@
             </p>
             <img src="./assets/img/clouds/stratified.jpg" class="mix-multiply"></img>
             <p>
-                For even greater efficiency, we send the grid points to a compute shader, which calculates a 
+                For even greater efficiency, we send all the grid points to a compute shader, which calculates a 
                 3D noise map with hundreds of GPU cores. Long live parallelism!
             </p>
             <a class="mono-link" href="#fractal-noise"><h3 id="fractal-noise">Fractal Noise</h3></a>
@@ -123,25 +123,50 @@
                 Beer's Law models the exponential decay of light energy as it propagates in an attenuating medium, like clouds. 
                 In a uniform medium, the energy of light attenutaes in a simple exponential function of the distance travelled.
             </p>
-            <img src="./assets/img/clouds/eq/eq_beer.svg" class="eq-block" style="height: 1.625rem;">
+            <img src="./assets/img/clouds/eq/eq_beer.svg" class="eq-block" style="height: 1.39rem;">
             <p>
                 For light travelling through a heterogeneous medium, we can modify the equation above slightly to acount for the varying medium density.
             </p>
-            <img src="./assets/img/clouds/eq/eq_beer_hetero.svg" class="eq-block" style="height: 2.2rem">
+            <img src="./assets/img/clouds/eq/eq_beer_hetero.svg" class="eq-block" style="height: 1.8rem">
             This type of attenuation can be found at multiple spots in the volume rendering equation.
-            <img src="./assets/img/clouds/eq/eq_volume.svg" class="eq-block" style="height: 5.1rem">
+            <img src="./assets/img/clouds/eq/eq_volume.svg" class="eq-block" style="height: 4.0rem">
             <img src="./assets/img/clouds/volume.jpeg" alt="Diagram showing different terms in the volume rendering equation." class="mix-multiply">
-            Still under construction ('cuz Lemur just finished this project two days ago. Sorry about that! 😢)
+            <p>
+                Implementing the equation in code that can run in real time, however, means that we have to make several approximations. 
+                Since a closed-form solution is clearly not feasible, we need to resort to Monte-Carlo integration instead. 
+                That means taking mutiple samples along a ray and doing discrete sums of light energy and transmittance.
+            </p>
+            <p>
+                The obvious headache now is the in-scattering term C. (We can ignore emssion since clouds don't shine themselves.) Evaulating it
+                precisely involves taking an integral of all in-scattered light over all possible direction - but each beam of in-scattered light obeys
+                the exact same formula we are trying to solve! Instead of fighting this recursive nightmare, we make the assumption that
+                most of the in-scattered energy comes from the primary scattering path: Sun → volume → sample point. This simplifies the term 
+                to just one integral
+            </p>
+            <img src="./assets/img/clouds/eq/eq_inscatter.svg" class="eq-block" style="height: 2rem">
+            <p>This is now much more computationally tractable and it still gives us some resonable results.</p>
+
+            <em>Still under construction ('cuz Lemur just finished this project two days ago. Sorry about that! 😢)</em>
 
 
             <a class="mono-link" href="#anistropic-scattering"><h3 id="anistropic-scattering">Anistropic Scattering</h3></a>
-            Still under construction ('cuz Lemur just finished this project two days ago. Sorry about that! 😢)
+            <p>
+                Anistropic scattering sounds like a scary term. But it really just means that light prefers to scatter in some direction 
+                rather than others. In clouds, light tends to move forward instead of backward. This is what gives clouds the stunning silver 
+                lining look when the Sun shines right through them into our eyes.
+            </p>
+            <p>
+                Following the SIGGRAPH talk, we use the Henyey-Greenstein phase function, 
+                originally proposed in 1949 for modeling diffusion of light in galaxies, to produce the anisotropy in cloud lighting.
+            </p>
+            <img src="./assets/img/clouds/eq/eq_hg.svg" class="eq-block" style="height: 3rem">
+            <em>Still under construction ('cuz Lemur just finished this project two days ago. Sorry about that! 😢)</em>
 
             <a class="mono-link" href="#dark-edges"><h3 id="dark-edges">Dark Edges</h3></a>
-            Still under construction ('cuz Lemur just finished this project two days ago. Sorry about that! 😢)
+            <em>Still under construction ('cuz Lemur just finished this project two days ago. Sorry about that! 😢)</em>
             
             <a class="mono-link" href="#sky"><h2 id="sky">III. Sky</h2></a>
-            Still under construction ('cuz Lemur just finished this project two days ago. Sorry about that! 😢)
+            <em>Still under construction ('cuz Lemur just finished this project two days ago. Sorry about that! 😢)</em>
         </div>
     </main>
 
