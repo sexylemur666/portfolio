@@ -74,6 +74,10 @@ a.mono-link:hover {
     color: #4f4f4f !important;
 }
 
+.mix-multiply {
+    mix-blend-mode: multiply;
+}
+
 
 .pr-1 {
     padding-right: 0.5rem;

@@ -82,7 +82,7 @@
                 This reduces the quadratic number of candidate neighbors dramatically to 27 (constant!) in 3D since we can easily find the cell
                 any point belongs. Here is an illustration for the 2D case as they're easier to draw.
             </p>
-            <img src="./assets/img/clouds/stratified.jpg"></img>
+            <img src="./assets/img/clouds/stratified.jpg" class="mix-multiply"></img>
             <p>
                 For even greater efficiency, we send the grid points to a compute shader, which calculates a 
                 3D noise map with hundreds of GPU cores. Long live parallelism!
@@ -128,9 +128,9 @@
                 For light travelling through a heterogeneous medium, we can modify the equation above slightly to acount for the varying medium density.
             </p>
             <img src="./assets/img/clouds/eq/eq_beer_hetero.svg" class="eq-block" style="height: 2.2rem">
-            We can find this type of attenuation at multiple spots in the volume rendering equation.
+            This type of attenuation can be found at multiple spots in the volume rendering equation.
             <img src="./assets/img/clouds/eq/eq_volume.svg" class="eq-block" style="height: 5.1rem">
-            <img src="./assets/img/clouds/volume.jpeg" alt="Diagram showing different terms in the volume rendering equation.">
+            <img src="./assets/img/clouds/volume.jpeg" alt="Diagram showing different terms in the volume rendering equation." class="mix-multiply">
             Still under construction ('cuz Lemur just finished this project two days ago. Sorry about that! 😢)
 
 
