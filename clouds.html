@@ -104,7 +104,7 @@
   
             <a class="mono-link" href="#tileable"><h3 id="tileable">Making it Tileable</h3></a>
             <p>
-                One last pitfall of our previous scheme is that textures created that way are not tileable: visible seams occur when we place two copies of a
+                One last pitfall of our previous scheme is that textures created that way are not tileable: visible seams appear when we place two copies of a
                 texture next to each other. Luckily, there's a simple trick to fix that: wrap the grid points around the unit cube. This makes
                 the grid points periodic and thus makes the noise texture tileable as well.
             </p>
@@ -128,7 +128,7 @@
                 For light travelling through a heterogeneous medium, we can modify the equation above slightly to acount for the varying density.
             </p>
             <img src="./assets/img/clouds/eq/eq_beer_hetero.svg" class="eq-block" style="height: 2.2rem">
-            We can see this type of attenuation at multiple spots in the volume rendering equation.
+            We can find this type of attenuation at multiple spots in the volume rendering equation.
             <img src="./assets/img/clouds/eq/eq_volume.svg" class="eq-block" style="height: 5.1rem">
             <img src="./assets/img/clouds/volume.jpeg" alt="Diagram showing different terms in the volume rendering equation.">
 
