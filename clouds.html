@@ -69,13 +69,13 @@
             <a class="mono-link" href="#shape"><h2 id="shape">I. Shape</h2></a>
             <p><a href="https://en.wikipedia.org/wiki/Worley_noise">Worley noise</a> is a type of cellular noise where the value of each point 
                 in space is determined by its distance to the closest neighbor in a set of random feature points. It is great for 
-                modeling the density of clouds because when inverted (hover or tap on the image below to see it yourself), it tends to produce those nice bobbly patterns that resemble clouds.
+                modeling the density of clouds because when inverted (hover or tap on the image below to see it yourself!), it produces those nice bobbly patterns that resemble clouds.
             </p>
             <div class="img-hover-pair">
                 <img src="./assets/img/clouds/worley.png"></img>
                 <img src="./assets/img/clouds/worley_inverted.png"></img>
             </div>
-            <a class="mono-link" href="#creating-worley-fast"><h3 id="creating-worley-fast">Spawning Worley Noise, Fast</h3></a>
+            <a class="mono-link" href="#generating-worley-fast"><h3 id="generating-worley-fast">Generating Worley Noise, Fast</h3></a>
             <p>
                 The first optimization we make of the above process is to take stratified samples of feature points in regular grid cells (let's call them
                 grid points) instead of uniformly in space. 
@@ -84,12 +84,12 @@
             </p>
             <img src="./assets/img/clouds/stratified.jpg" class="mix-multiply"></img>
             <p>
-                For even greater efficiency, we also send all the grid points to a compute shader, which calculates a 
-                3D noise map with hundreds of GPU cores in parallel. Long live parallelism!
+                For even greater efficiency, we write a compute shader and feed all the grid points to it. The compute shader can then 
+                calculate a 3D noise map with hundreds of GPU cores in parallel. Long live parallelism!
             </p>
             <a class="mono-link" href="#fractal-noise"><h3 id="fractal-noise">Fractal Noise</h3></a>
             <p>
-                To create sufficient details for our clouds, we generate two sets of 3D Worley noise: a high resolution (200x200x200) one
+                To create sufficient details for our clouds, we generate two sets of 3D Worley noise texture: a high resolution (200x200x200) one
                 that controls the overall shape of the clouds, and a second lower resolution (64x64x64) one that adds details to the base
                 shape by eroding lower-density regions of the shape texture. Each texture map has 4 channels of 3-layer Worley noise of 
                 increasing frequency. This overlaying process generates <a href="https://thebookofshaders.com/13/">fractal-like</a> noise 
@@ -111,11 +111,11 @@
     
             
             <a class="mono-link" href="#lighting"><h2 id="lighting">II. Lighting</h2></a>
-            <p>There are three key ingredients when it comes to realistic lighting for the clouds.</p>
+            <p>There are three key ingredients we need for achieving fast, realistic lighting for clouds.</p>
             <ul>
                 <li><a href="#beers-law">Beer's Law</a> or the exponential decay of light</li>
-                <li><a href="#anistropic-scattering">Anistropic scattering</a> responsible for that iconic silver lining look</li>
-                <li><a href="#dark-edges">Dark edges</a> on clouds that give them a sugar-powder-like texture</li>
+                <li><a href="#anistropic-scattering">Anistropic scattering</a> responsible for the iconic silver lining effect</li>
+                <li><a href="#dark-edges">Dark edges</a> on clouds that give them a sugar-powder-like look</li>
             </ul>
             <p>Let's walk through them now.</p>
             <a class="mono-link" href="#beers-law"><h3 id="beers-law">Beer's Law</h3></a>
@@ -145,8 +145,7 @@
             </p>
             <img src="./assets/img/clouds/eq/eq_inscatter.svg" class="eq-block" style="height: 2rem">
             <p>This is now much more computationally tractable and it gives us a base lighting model to build upon.</p>
-
-            <em>Still under construction ('cuz Lemur just finished this project two days ago. Sorry about that! 😢)</em>
+            <img src="./assets/img/clouds/render-beers.png" alt="Clouds rendered with Beer's Law." class="mix-multiply">
 
 
             <a class="mono-link" href="#anistropic-scattering"><h3 id="anistropic-scattering">Anistropic Scattering</h3></a>
@@ -160,13 +159,19 @@
                 originally proposed in 1949 for modeling diffusion of light in galaxies, to produce the anisotropy in cloud lighting.
             </p>
             <img src="./assets/img/clouds/eq/eq_hg.svg" class="eq-block" style="height: 3rem">
-            <em>Still under construction ('cuz Lemur just finished this project two days ago. Sorry about that! 😢)</em>
+            <p>Adding the Henyey-Greenstein phase function to Beer's Law gives us the following nice result.</p>
+            <img src="./assets/img/clouds/render-hg.png" alt="Clouds render with Beer's law and Henyey-Greenstein phase function." class="mix-multiply">
+            <p>Notice how much brighter the cloud has become near the sun. We get our silver lining!</p>
 
             <a class="mono-link" href="#dark-edges"><h3 id="dark-edges">Dark Edges</h3></a>
-            There's still one thing missing for our final clouds lighting. The dark edges of the clouds when one looks away 
-            from the Sun. The developer
-            <em>Still under construction ('cuz Lemur just finished this project two days ago. Sorry about that! 😢)</em>
-            
+            <p>
+                There's still one ingredient missing for our full-blown cloud lighting - the dark edges of the clouds when we look away 
+                from the Sun.
+            </p>
+<p>
+                <em>Still under construction ('cuz Lemur just finished this project two days ago. Sorry about that! 😢)</em>
+
+</p>                
             <a class="mono-link" href="#sky"><h2 id="sky">III. Sky</h2></a>
             <em>Still under construction ('cuz Lemur just finished this project two days ago. Sorry about that! 😢)</em>
         </div>
