@@ -176,6 +176,7 @@ img.icon {
     }
 
     .project-item .tags {
+        margin-bottom: 1.25rem;
         font-weight: 600;
     }
     
@@ -225,8 +226,9 @@ img.icon {
         width: 100%;
         top: 0;
         left: 0;
-        padding: 1.5rem;
-        padding-bottom: 5rem;  /* keep this to make gradient work! */
+        padding-top: 1.0rem;
+        padding-left: 1.5rem;
+        padding-bottom: 6rem;  /* keep this to make gradient work! */
 
         /* disable transition on load */
         -webkit-transition: none !important;
@@ -288,9 +290,8 @@ img.icon {
     margin-bottom: .25rem;
 }
 
-.project-item .text .tags {
+.project-item .tags {
     font-style: italic;
-    margin-bottom: 1.25rem;
 }
 
 .project-item .cover {
